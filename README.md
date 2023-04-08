@@ -4,13 +4,15 @@
 
 Building prototypes and apps is fun. Dealing with certificates and provisioning admin is not. I've written this guide for anyone going through the same frustrations as me, trying to package up, code-sign, notarize and share a Vue.js + Electron.js app on a Mac-os (Ventura 13.3). I hope it helps.
 
+The original article can be found on my [blog.](https://www.peterkoraca.com/blog)
+
 ## Process Overview
 
 1. Building your app
 2. Apple Developer Programme Certificates – Requesting, Generating, Creating, Downloading and Installing
 3. Configuring **electron-builder**
 4. Packaging, Signing and Notarizing the app
-5. Sharing the app
+5. Share/Distribute the app
 
 ## Process Details
 
@@ -128,13 +130,13 @@ At this point, **you have a signed binary, a zipped file of your binary, but it 
 
 14. Store the information acquired in a profile notary tool that can use. The tool will ask you for a **profile name** note this down as you will need it in the next step.
 
-```
+```bash
 $ xcrun notarytool store-credentials --apple-id "YOURAPPLE_ID@EMAIL.COM" --team-id "YOUR_TEAM_ID"
 ```
 
 13. Submit & Notarize your app with Apple's **notarytool** This process might take some time.
 
-```
+```bash
 $ xcrun notarytool submit yourapp.zip --keychain-profile "YOUR_PROFILE_NAME" --wait
 ```
 
@@ -142,13 +144,13 @@ You should now have a signed and notarized app if all goes well.
 
 14. Attach the notarization info to the app with the following:
 
-```
-xcrun stapler staple YOUR_APP.app
+```bash
+$ xcrun stapler staple YOUR_APP.app
 ```
 
 15. If all goes well you should be able to run the following check and receive the following:
 
-```
+```bash
 $ spctl --assess -vv --type install YOUR_APP.app
 
 youarapp.app: accepted
@@ -183,8 +185,10 @@ const preloadPath = path.resolve(__dirname, "electron-preload.js");
 
 Hope this helps
 
-## Share away
+## Share/Distribute the app
 
 Now you're ready to share your app with others without it getting immediately blocked and hidden in the system settings privacy section.
 
 Good luck 🤗
+
+[Peter Koraca,](https://www.peterkoraca.com) 6th of April 2023.
