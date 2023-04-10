@@ -81,6 +81,7 @@ You should see everything in your Keychain Access app under System/Certificates 
 
 Your package.json should have a **build** section. This will tell electron builder how to package up your app.
 Here's what I have in mine (replace the APP_NAME with your actual app name).
+The app category has to be one of Apple’s from their [documentation.](https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/TP40009250-SW8)
 
 ```json
 "build": {
